@@ -1,0 +1,51 @@
+Giai đoạn 1: Nền móng Backend & Database 🎉
+
+Setup project .NET Core Web API.
+
+Cài đặt các package cần thiết (EF Core, JWT, BCrypt).
+
+Tạo User & Todo Entities.
+
+Thiết lập AppDbContext và chạy Migration lần đầu để tạo file SQLite.
+
+Giai đoạn 2: Xây dựng Authentication (Core Security)
+
+Triển khai IAuthService và AuthService.
+
+Tích hợp băm mật khẩu BCrypt (bảo mật dữ liệu user).
+
+Viết logic tạo JWT Token.
+
+Mở API endpoints tại AuthController và test qua Swagger/Postman.
+
+Giai đoạn 3: Hoàn thiện Nghiệp vụ Todo (Business Logic)
+
+Viết ITodoService và TodoService (chỉ user nào thao tác data của user đó).
+
+Tạo TodoController bảo vệ bằng attribute [Authorize].
+
+Viết ExceptionMiddleware để bắt các lỗi nghiệp vụ và trả về HTTP status code chuẩn (400, 401, 403, 404, 500).
+
+Giai đoạn 4: Khởi tạo Flutter Frontend & Base Architecture
+
+Setup project Flutter mới.
+
+Cài đặt các thư viện: dio, flutter_secure_storage, riverpod (hoặc State Management theo anh chọn).
+
+Cấu hình ApiClient với Interceptors để tự động gắn JWT vào mỗi request.
+
+Giai đoạn 5: Tích hợp Giao diện & Kết nối API
+
+Xây dựng màn hình Login / Register.
+
+Xây dựng màn hình Todo List & tính năng thêm/sửa/xóa/hoàn thành.
+
+Xử lý luồng lưu token khi đăng nhập và tự động xóa token/đăng xuất khi token hết hạn.
+
+Giai đoạn 6: Tối ưu & Triển khai (Deployment)
+
+Review lại toàn bộ code, tối ưu các truy vấn N+1 nếu có trong EF Core.
+
+Publish Backend lên VPS (cấu hình Kestrel hoặc Nginx reverse proxy).
+
+Build ứng dụng Flutter ra file APK/IPA.

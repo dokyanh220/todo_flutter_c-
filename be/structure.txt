@@ -1,0 +1,25 @@
+Todo.be/
+├── Controllers/
+│   ├── AuthController.cs      // Nhận request Login/Register
+│   └── TodoController.cs      // Nhận request CRUD Todo
+├── DTOs/
+│   ├── Auth/
+│   │   ├── LoginDto.cs
+│   │   └── RegisterDto.cs     // Chứa validation (Required, MinLength)
+│   └── Todo/
+│       └── CreateTodoDto.cs
+├── Entities/
+│   ├── User.cs                // Ánh xạ bảng Users
+│   └── Todo.cs                // Ánh xạ bảng Todos
+├── Interfaces/
+│   ├── IAuthService.cs        // Contract cho DI
+│   └── ITodoService.cs
+├── Services/
+│   ├── AuthService.cs         // Xử lý logic băm mật khẩu, tạo JWT
+│   └── TodoService.cs         // Xử lý logic thêm/sửa/xóa Todo
+├── Data/
+│   └── AppDbContext.cs        // Cấu hình EF Core & Fluent API
+├── Middlewares/
+│   └── ExceptionMiddleware.cs // Bắt lỗi global, ẩn chi tiết lỗi hệ thống
+├── Program.cs                 // Entry point, đăng ký DI và Middleware
+└── appsettings.json           // Lưu JWT Secret và Connection String
