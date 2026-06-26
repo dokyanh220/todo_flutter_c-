@@ -10,7 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace be.Services
 {
-    class AuthService : IAuthService
+    public class AuthService : IAuthService
     {
         private readonly AppDbContext _context;
         private readonly IConfiguration _configuration;
@@ -36,14 +36,19 @@ namespace be.Services
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<string> LoginAsync(string username, string password)
+        public async Task<AuthResponseDto> LoginAsync(string username, string password)
         {
             var user = await _context.Users.SingleOrDefaultAsync(u => u.Username == username);
 
             if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.Password))
                 throw new UnauthorizedAccessException("Tên đăng nhập hoặc mật khẩu sai");
 
-            return GenerateJwtToken(user);
+            return new AuthResponseDto
+            {
+                Token = GenerateJwtToken(user),
+                UserId = user.Id,
+                Username = user.Username
+            };
         }
 
         private string GenerateJwtToken(User user)
