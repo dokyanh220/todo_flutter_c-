@@ -9,6 +9,9 @@ class TodoListScreen extends ConsumerWidget {
 
   void _logout(BuildContext context, WidgetRef ref) async {
     await ref.read(authNotifierProvider.notifier).logout();
+
+    ref.invalidate(todoNotifierProvider);
+
     if (context.mounted) {
       // Xóa toàn bộ stack màn hình cũ và đẩy về Login
       Navigator.pushAndRemoveUntil(
@@ -129,11 +132,13 @@ class TodoListScreen extends ConsumerWidget {
                         flex: 1,
                         child: Checkbox(
                           value: todo.isCompleted,
-                          onChanged: (_) {
-                            ref
-                                .read(todoNotifierProvider.notifier)
-                                .toggleStatus(todo.id, todo.isCompleted);
-                          },
+                          onChanged: todo.isCompleted
+                              ? null
+                              : (_) {
+                                  ref
+                                      .read(todoNotifierProvider.notifier)
+                                      .toggleStatus(todo.id, todo.isCompleted);
+                                },
                         ),
                       ),
 

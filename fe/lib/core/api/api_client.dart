@@ -6,7 +6,7 @@ class ApiClient {
   final FlutterSecureStorage _secureStorage;
 
   ApiClient(this._dio, this._secureStorage) {
-    _dio.options.baseUrl = "http://localhost:5280/api/";
+    _dio.options.baseUrl = "http://192.168.1.81:5280/api/";
     _dio.options.connectTimeout = const Duration(seconds: 10);
     _dio.options.receiveTimeout = const Duration(seconds: 10);
 

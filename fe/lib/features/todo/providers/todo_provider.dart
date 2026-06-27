@@ -40,20 +40,31 @@ class TodoNotifier extends StateNotifier<AsyncValue<List<Todo>>> {
   }
 
   Future<void> toggleStatus(int id, bool currentStatus) async {
-    try {
-      final updatedTodo = await _repository.updateTodo(
-        id,
-        null,
-        !currentStatus,
-      );
+    if (currentStatus == true) return;
 
-      if (state is AsyncData) {
-        final currentList = state.value!;
-        state = AsyncData(
-          currentList.map((t) => t.id == id ? updatedTodo : t).toList(),
-        );
-      }
+    final previousState = state;
+
+    if (state is AsyncData) {
+      final currentList = state.value!;
+      state = AsyncData(
+        currentList.map((t) {
+          if (t.id == id) {
+            return Todo(
+              id: t.id,
+              title: t.title,
+              isCompleted: true, // Ép thành true
+              createdAt: t.createdAt,
+            );
+          }
+          return t;
+        }).toList(),
+      );
+    }
+
+    try {
+      await _repository.updateTodo(id, null, true);
     } catch (e) {
+      state = previousState;
       rethrow;
     }
   }

@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using be.DTOs.Todo;
 using be.Entities;
@@ -21,7 +22,11 @@ namespace be.Controllers
 
         private int GetUserId()
         {
-            return int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+            var claim = User.FindFirst(JwtRegisteredClaimNames.Sub) ??
+                User.FindFirst(ClaimTypes.NameIdentifier);
+            
+            if (claim == null) throw new UnauthorizedAccessException("Token không hợp lệ.");
+            return int.Parse(claim.Value);
         }
 
         [HttpGet]

@@ -1,5 +1,6 @@
 import 'package:fe/features/auth/providers/auth_provider.dart';
 import 'package:fe/features/auth/views/register_screen.dart';
+import 'package:fe/features/todo/providers/todo_provider.dart';
 import 'package:fe/features/todo/views/todo_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -34,6 +35,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           );
 
       if (success && mounted) {
+        ref.invalidate(todoNotifierProvider);
+
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const TodoListScreen()),
