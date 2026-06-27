@@ -1,6 +1,7 @@
 using System.Text;
 using be.Data;
 using be.Interfaces;
+using be.Middlewares;
 using be.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +33,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 using (var scope = app.Services.CreateScope())
 {
