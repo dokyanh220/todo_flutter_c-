@@ -18,7 +18,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
 
   @override
-  void dispsose() {
+  void dispose() {
     _usernameController.dispose();
     _passwordController.dispose();
     super.dispose();
